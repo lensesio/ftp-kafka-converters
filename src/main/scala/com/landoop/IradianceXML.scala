@@ -19,17 +19,13 @@ class IradianceXML extends SourceRecordConverter {
     val lat = (data \\ "site" \ "@lat").toString.toDouble
     val lng = (data \\ "site" \ "@lng").toString.toDouble
 
-    println(s"siteID = $siteID  lat= $lat  lng= $lng")
-
     val rows = (data \\ "row").map { rowData =>
       val dateTime = (rowData \ "@dateTime").toString
       val value = (rowData \ "@values").toString.toDouble
 
       val message = IradianceData(siteID, lat, lng, dateTime, value)
-      println("dateTime - " + dateTime + " --> " + message)
       new SourceRecord(in.sourcePartition, in.sourceOffset, in.topic, 0, null, message)
     }
-
     rows.toList.asJava
   }
 
