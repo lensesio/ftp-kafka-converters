@@ -26,7 +26,7 @@ class IradianceXMLSpec extends WordSpec with Matchers {
 
     "flatten xml into records with ( site id, lat, lng, dateTime, value )" in {
 
-      val inputLineRecord = new SourceRecord(sourcePartition, sourceOffset, "topic", 0, null, sample.toString)
+      val inputLineRecord = new SourceRecord(sourcePartition, sourceOffset, "topic", 0, null, sample.toString.getBytes)
 
       val convertedRecords = new IradianceXML().convert(inputLineRecord).asScala
 

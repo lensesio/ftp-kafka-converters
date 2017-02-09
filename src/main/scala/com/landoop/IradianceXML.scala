@@ -13,8 +13,7 @@ class IradianceXML extends SourceRecordConverter {
   override def configure(props: util.Map[String, _]): Unit = {}
 
   override def convert(in: SourceRecord): util.List[SourceRecord] = {
-    // Remove BOM
-    val line = in.value.toString.replace("\uFEFF", "")
+    val line = new String(in.value.asInstanceOf[Array[Byte]])
     val data = scala.xml.XML.loadString(line)
 
     val siteID = (data \\ "site" \ "@id").toString

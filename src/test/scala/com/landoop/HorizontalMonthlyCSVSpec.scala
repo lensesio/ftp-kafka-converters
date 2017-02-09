@@ -17,7 +17,7 @@ class HorizontalMonthlyCSVSpec extends WordSpec with Matchers {
       val line =
         """ABCDEFG_214669932_Import,18/09/2015,1.5,1.5,1.6,1.5,1.5,1.5,1.7,1.6,1.5,2,10.2,10.4,10.2,12.6,11.2,9.5,8.8,8.9,3.9,0.4,1.2,1.4,1.1,5.3,3.5,7,3,0.2,1.2,1.9,2.9,0,0,0,0,0.1,0.8,1.5,1.4,1.5,1.6,1.5,1.4,1.5,1.7,1.4,1.5,1.5"""
 
-      val inputLineRecord = new SourceRecord(sourcePartition, sourceOffset, "topic", 0, null, line)
+      val inputLineRecord = new SourceRecord(sourcePartition, sourceOffset, "topic", 0, null, line.getBytes)
 
       val convertedRecords = new HorizontalMonthlyCSV().convert(inputLineRecord)
 
@@ -33,7 +33,7 @@ class HorizontalMonthlyCSVSpec extends WordSpec with Matchers {
       val line =
         """ABCDEFG_214669932_Import,15/10/2015,1.4,1.3,1.7,1.3,1.5,,,,,,,,12.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"""
 
-      val inputLineRecord = new SourceRecord(sourcePartition, sourceOffset, "topic", 0, null, line)
+      val inputLineRecord = new SourceRecord(sourcePartition, sourceOffset, "topic", 0, null, line.getBytes)
 
       val convertedRecords = new HorizontalMonthlyCSV().convert(inputLineRecord)
       convertedRecords.size shouldBe 6

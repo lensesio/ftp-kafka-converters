@@ -24,7 +24,7 @@ class MultiChannelCSV extends SourceRecordConverter {
   val dateFormat = DateTimeFormat.forPattern("H:m:s E d/M/Y")
 
   override def convert(in: SourceRecord): util.List[SourceRecord] = {
-    val line = in.value.toString
+    val line = new String(in.value.asInstanceOf[Array[Byte]])
     val tokens = Parser.fromLine(line)
 
     val deviceID = tokens.head
