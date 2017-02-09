@@ -7,7 +7,7 @@ import scala.collection.JavaConverters._
 import org.joda.time.DateTime
 import java.util
 
-import com.typesafe.scalalogging.StrictLogging
+import com.typesafe.scalalogging.slf4j.StrictLogging
 import org.joda.time.format.DateTimeFormat
 
 class MultiChannelCSV extends SourceRecordConverter with StrictLogging {

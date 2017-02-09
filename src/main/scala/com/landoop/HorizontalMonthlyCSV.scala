@@ -3,7 +3,7 @@ package com.landoop
 import java.util
 
 import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
-import com.typesafe.scalalogging.StrictLogging
+import com.typesafe.scalalogging.slf4j.StrictLogging
 import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
 import org.apache.kafka.connect.source.SourceRecord
 

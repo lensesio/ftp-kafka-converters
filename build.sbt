@@ -11,7 +11,7 @@ libraryDependencies ++= {
   Seq(
     "com.github.nscala-time" %% "nscala-time" % "2.14.0",
     "org.scala-lang" % "scala-xml" % "2.11.0-M4",
-    "com.typesafe.scala-logging"   %% "scala-logging" % "3.5.0",
+    "com.typesafe.scala-logging"   %% "scala-logging-slf4j" % "2.1.2",
     "org.apache.kafka" % "connect-api" % kafkaVersion % "provided",
     "org.scalatest" %% "scalatest" % "3.0.1" % "test"
   )
