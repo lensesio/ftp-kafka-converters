@@ -1,5 +1,6 @@
 package com.landoop
 
+import org.apache.kafka.connect.data.Struct
 import org.apache.kafka.connect.source.SourceRecord
 import org.scalatest.{Matchers, WordSpec}
 
@@ -25,16 +26,16 @@ class MultiChannelCSVSpec extends WordSpec with Matchers {
 
       // For every 1 CSV line this emits one record on one topic - and a sequence of messages on another topic
       convertedRecords.head.topic shouldBe "topic-snapshots"
-      val expected = ChannelASnapshot(deviceID = "ABCDE123", meterID = "11313710", 1445641847L, snapshot = 7039711.194D)
-      convertedRecords.head.value.asInstanceOf[ChannelASnapshot] shouldBe expected
+      val expected = ChannelASnapshot(deviceID = "ABCDE123", meterID = "11313710", 1445641847L, snapshot = 7039711.194D).getStructure
+      convertedRecords.head.value.asInstanceOf[Struct] shouldBe expected
 
       // 2nd record .. 49th is 30 minute separated sequence of messages
-      val channelARecord = convertedRecords(1).value.asInstanceOf[ChannelA]
-      channelARecord shouldBe ChannelA(deviceID = "ABCDE123", meterID = "11313710", epoch = 1445641847L, measurement = 0.0D)
+      val channelARecord = convertedRecords(1).value.asInstanceOf[Struct]
+      channelARecord shouldBe ChannelA(deviceID = "ABCDE123", meterID = "11313710", epoch = 1445641847L, measurement = 0.0D).getStructure
 
       // 3rd record on 1.1
-      val channelARecordTwo = convertedRecords(2).value.asInstanceOf[ChannelA]
-      channelARecordTwo shouldBe ChannelA(deviceID = "ABCDE123", meterID = "11313710", epoch = 1445645447L, measurement = 1.1D)
+      val channelARecordTwo = convertedRecords(2).value.asInstanceOf[Struct]
+      channelARecordTwo shouldBe ChannelA(deviceID = "ABCDE123", meterID = "11313710", epoch = 1445645447L, measurement = 1.1D).getStructure
 
     }
 

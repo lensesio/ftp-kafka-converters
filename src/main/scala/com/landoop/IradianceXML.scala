@@ -1,12 +1,11 @@
 package com.landoop
 
+import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
+
+import scala.collection.JavaConverters._
 import java.util
 
-import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
 import org.apache.kafka.connect.source.SourceRecord
-import scala.collection.JavaConverters._
-
-case class IradianceData(siteID: String, lat: Double, lng: Double, datetime: String, value: Double)
 
 class IradianceXML extends SourceRecordConverter {
 
@@ -23,9 +22,8 @@ class IradianceXML extends SourceRecordConverter {
     val rows = (data \\ "row").map { rowData =>
       val dateTime = (rowData \ "@dateTime").toString
       val value = (rowData \ "@values").toString.toDouble
-
       val message = IradianceData(siteID, lat, lng, dateTime, value)
-      new SourceRecord(in.sourcePartition, in.sourceOffset, in.topic, 0, null, message)
+      new SourceRecord(in.sourcePartition, in.sourceOffset, in.topic, 0, message.connectSchema, message.getStructure)
     }
     rows.toList.asJava
   }

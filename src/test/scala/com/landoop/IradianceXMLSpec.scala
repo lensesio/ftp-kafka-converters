@@ -1,10 +1,10 @@
 package com.landoop
 
+import org.apache.kafka.connect.data.Struct
 import org.apache.kafka.connect.source.SourceRecord
 import org.scalatest.{Matchers, WordSpec}
 
 import scala.collection.JavaConverters._
-
 import scala.xml.Elem
 
 /**
@@ -31,8 +31,8 @@ class IradianceXMLSpec extends WordSpec with Matchers {
       val convertedRecords = new IradianceXML().convert(inputLineRecord).asScala
 
       convertedRecords.size shouldBe 96
-      val expectedValue = IradianceData(siteID = "site-ID-1234", lat =56.3491D , lng = -2.41118D,datetime="2016-12-01T09:18:00.000Z", value=132.0D)
-      convertedRecords(36).value.asInstanceOf[IradianceData] shouldBe expectedValue
+      val expectedValue = IradianceData(siteID = "site-ID-1234", lat =56.3491D , lng = -2.41118D,datetime="2016-12-01T09:18:00.000Z", value=132.0D).getStructure
+      convertedRecords(36).value.asInstanceOf[Struct] shouldBe expectedValue
 
     }
 

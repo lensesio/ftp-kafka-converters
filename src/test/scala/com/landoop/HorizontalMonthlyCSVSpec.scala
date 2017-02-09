@@ -1,5 +1,6 @@
 package com.landoop
 
+import org.apache.kafka.connect.data.Struct
 import org.apache.kafka.connect.source.SourceRecord
 import org.scalatest.{Matchers, WordSpec}
 
@@ -22,9 +23,9 @@ class HorizontalMonthlyCSVSpec extends WordSpec with Matchers {
       val convertedRecords = new HorizontalMonthlyCSV().convert(inputLineRecord)
 
       convertedRecords.size shouldBe 48
-      convertedRecords.get(0).value.asInstanceOf[Event] shouldBe Event("ABCDEFG_214669932_Import", 1421539740L, 1.5D)
-      convertedRecords.get(2).value.asInstanceOf[Event] shouldBe Event("ABCDEFG_214669932_Import", 1421543340L, 1.6D)
-      convertedRecords.get(6).value.asInstanceOf[Event] shouldBe Event("ABCDEFG_214669932_Import", 1421550540L, 1.7D)
+      convertedRecords.get(0).value.asInstanceOf[Struct] shouldBe DeviceEvent("ABCDEFG_214669932_Import", 1421539740L, 1.5D).getStructure
+      convertedRecords.get(2).value.asInstanceOf[Struct] shouldBe DeviceEvent("ABCDEFG_214669932_Import", 1421543340L, 1.6D).getStructure
+      convertedRecords.get(6).value.asInstanceOf[Struct] shouldBe DeviceEvent("ABCDEFG_214669932_Import", 1421550540L, 1.7D).getStructure
 
     }
 
