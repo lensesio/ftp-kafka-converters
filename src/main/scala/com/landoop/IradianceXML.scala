@@ -2,6 +2,7 @@ package com.landoop
 
 import java.util
 
+import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
 import org.apache.kafka.connect.source.SourceRecord
 import scala.collection.JavaConverters._
 
@@ -12,7 +13,8 @@ class IradianceXML extends SourceRecordConverter {
   override def configure(props: util.Map[String, _]): Unit = {}
 
   override def convert(in: SourceRecord): util.List[SourceRecord] = {
-    val line = in.value.toString
+    // Remove BOM
+    val line = in.value.toString.replace("\uFEFF", "")
     val data = scala.xml.XML.loadString(line)
 
     val siteID = (data \\ "site" \ "@id").toString

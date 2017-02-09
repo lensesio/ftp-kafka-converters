@@ -1,4 +1,4 @@
-package com.landoop
+package com.datamountaineer.streamreactor.connect.ftp
 
 import org.apache.kafka.common.Configurable
 import org.apache.kafka.connect.source.SourceRecord

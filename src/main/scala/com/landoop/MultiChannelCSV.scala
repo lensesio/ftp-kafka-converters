@@ -2,6 +2,7 @@ package com.landoop
 
 import java.util
 
+import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
 import org.apache.kafka.connect.source.SourceRecord
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.DateTime
