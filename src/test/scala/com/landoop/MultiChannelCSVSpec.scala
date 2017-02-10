@@ -22,19 +22,19 @@ class MultiChannelCSVSpec extends WordSpec with Matchers {
 
       val convertedRecords = new MultiChannelCSV().convert(inputLineRecord).asScala
 
-      convertedRecords.size shouldBe 48 + 1
+      convertedRecords.size shouldBe 48
 
       // For every 1 CSV line this emits one record on one topic - and a sequence of messages on another topic
-      convertedRecords.head.topic shouldBe "topic-snapshots"
-      val expected = ChannelASnapshot(deviceID = "ABCDE123", meterID = "11313710", 1445641847L, snapshot = 7039711.194D).getStructure
-      convertedRecords.head.value.asInstanceOf[Struct] shouldBe expected
+      //convertedRecords.head.topic shouldBe "topic-snapshots"
+      //val expected = ChannelASnapshot(deviceID = "ABCDE123", meterID = "11313710", 1445641847L, snapshot = 7039711.194D).getStructure
+      // convertedRecords.head.value.asInstanceOf[Struct] shouldBe expected
 
-      // 2nd record .. 49th is 30 minute separated sequence of messages
-      val channelARecord = convertedRecords(1).value.asInstanceOf[Struct]
+      // 1nd record .. 49th is 30 minute separated sequence of messages
+      val channelARecord = convertedRecords(0).value.asInstanceOf[Struct]
       channelARecord shouldBe ChannelA(deviceID = "ABCDE123", meterID = "11313710", epoch = 1445641847L, measurement = 0.0D).getStructure
 
-      // 3rd record on 1.1
-      val channelARecordTwo = convertedRecords(2).value.asInstanceOf[Struct]
+      // 2rd record on 1.1
+      val channelARecordTwo = convertedRecords(1).value.asInstanceOf[Struct]
       channelARecordTwo shouldBe ChannelA(deviceID = "ABCDE123", meterID = "11313710", epoch = 1445645447L, measurement = 1.1D).getStructure
 
     }
