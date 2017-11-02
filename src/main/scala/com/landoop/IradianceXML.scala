@@ -1,10 +1,9 @@
 package com.landoop
 
-import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
-
 import scala.collection.JavaConverters._
 import java.util
 
+import com.datamountaineer.streamreactor.connect.ftp.source.SourceRecordConverter
 import org.apache.kafka.connect.source.SourceRecord
 
 class IradianceXML extends SourceRecordConverter {
