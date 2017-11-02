@@ -1,4 +1,4 @@
-package com.datamountaineer.streamreactor.connect.ftp
+package com.datamountaineer.streamreactor.connect.ftp.source
 
 import org.apache.kafka.common.Configurable
 import org.apache.kafka.connect.source.SourceRecord

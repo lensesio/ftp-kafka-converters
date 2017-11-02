@@ -1,12 +1,12 @@
 package com.landoop
 
-import com.datamountaineer.streamreactor.connect.ftp.SourceRecordConverter
 import org.apache.kafka.connect.source.SourceRecord
 
 import scala.collection.JavaConverters._
 import org.joda.time.DateTime
 import java.util
 
+import com.datamountaineer.streamreactor.connect.ftp.source.SourceRecordConverter
 import com.typesafe.scalalogging.slf4j.StrictLogging
 import org.joda.time.format.DateTimeFormat
 
